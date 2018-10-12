@@ -12,7 +12,8 @@ router.post('/signup', (req, res, next) => {
   User.register(req.body, h4$hP4$$)
   .then(user => {
     const {_id} = user
-    link = `https://${req.headers.host}/profile/${_id}`
+    link = `http://localhost:3001/profile/${_id}`
+    //link = `https://${req.headers.host}/profile/${_id}`
     QRCode.toDataURL(link, (err, QR) => {
       if (err) throw err
       User.findByIdAndUpdate(_id, { QR }, { new: true })
@@ -50,8 +51,12 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
   res.status(200).json({ user, token })
 })
 
-router.get('/private', verifyToken, (req, res, next) => {
-  res.send('Esto es privado')
+router.get('/profile/:id', (req, res, next) => {
+  User.findById(req.params.id)
+  .then(user => {
+    res.status(201).json(user)
+  })
+  .catch(err => next(err))
 })
 
 module.exports = router
