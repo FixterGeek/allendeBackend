@@ -21,19 +21,19 @@ router.post('/', (req,res, next)=>{
     .catch(e=>next(e))
 })
 
-router.get('/:id', verifyToken, (req,res, next)=>{
+router.get('/:id', (req,res, next)=>{
     Alert.findById(req.params.id)
     .then(alert=>res.status(200).json(alert))
     .catch(e=>next(e))
 })
 
-router.put('/:id', verifyToken, (req,res, next)=>{
+router.put('/:id', (req,res, next)=>{
     Alert.findByIdAndUpdate(req.params.id,req.body,{new:true})
     .then(alert=>res.status(200).json(alert))
     .catch(e=>next(e))
 })
 
-router.delete('/:id', verifyToken, (req,res, next)=>{
+router.delete('/:id', (req,res, next)=>{
     Alert.findByIdAndRemove(req.params.id)
     .then(alert=>res.status(200).json(alert))
     .catch(e=>next(e))
