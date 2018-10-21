@@ -19,7 +19,7 @@ exports.welcomeMail = (username, email, password) => {
         <br/>
         <h3>Puedes acceder y cambiar tu password en el siguiente link:</h3>
         <br/>
-        <a href='http://localhost:3001/active?user=${email}?h4$h=${password}' target='_blank' > Cervecería Allende </a>
+        <a href='https://allende-e2e4c.firebaseapp.com/active?user=${email}?h4$h=${password}' target='_blank' > Cervecería Allende </a>
       `
   }).then(info => console.log(info)).catch(error => console.log(error))
 }
