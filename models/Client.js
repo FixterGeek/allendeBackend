@@ -20,11 +20,7 @@ const clientSchema = new Schema({
     city: String
   },
   location_zone: Number,
-  delivery_time: String,
-  orders:[{
-    type: Schema.Types.ObjectId,
-    ref:"Order"
-  }]
+  delivery_time: String
 }, {
   timestamps: {
     createdAt: 'created_at',
