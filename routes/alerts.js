@@ -9,6 +9,12 @@ router.get('/', (req,res, next)=>{
     .catch(e=>next(e))
 })
 
+router.get('/admin', (req,res, next)=>{
+    Alert.find()
+    .then(alerts=>res.status(200).json(alerts))
+    .catch(e=>next(e))
+})
+
 router.post('/', (req,res, next)=>{
     Alert.create(req.body)
     .then(alert=>res.status(200).json(alert))
