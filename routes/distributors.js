@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Model = require('../models/Distributor')
 const {verifyToken} = require('../helpers/jwt')
+const fetch = require('fetch')
 
 router.get('/', (req,res, next)=>{
     Model.find()
