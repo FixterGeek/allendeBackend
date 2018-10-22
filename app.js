@@ -44,12 +44,14 @@ const orders = require('./routes/orders')
 const products = require('./routes/products')
 const alerts = require('./routes/alerts')
 const distributors = require('./routes/distributors')
+const promos = require('./routes/promos')
 app.use('/auth', auth);
 app.use('/clients', clients)
 app.use('/orders', orders)
 app.use('/products', products)
 app.use('/alerts', alerts)
 app.use('/distributors', distributors)
+app.use('/promos', promos)
 app.use('/', index);
 
 module.exports = app;
