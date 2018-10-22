@@ -43,21 +43,20 @@ router.delete('/:id', (req,res, next)=>{
 
 function createUser(item){
     const {email} = item
-    item.username = email
+    item.username = business_name
     let h4$hP4$$ = bcrypt.hashSync(email, bcrypt.genSaltSync(7))
     User.register(item, h4$hP4$$)
     //User.register(req.body, req.body.password)
     .then(user => {
         console.log("nuevo user: ", user)
-      const {_id} = user
-      link = `https://backendallende.herokuapp.com//profile/${_id}`
+      link = `https://backendallende.herokuapp.com//profile/${user._id}`
       //link = `http://localhost:3001/profile/${_id}`
       //link = `https://${req.headers.host}/profile/${_id}`
       QRCode.toDataURL(link, (err, QR) => {
         if (err) throw err
-        User.findByIdAndUpdate(_id, { QR }, { new: true })
-        .then(user => {
-          mailer.welcomeMail(user.business_name, user.email, h4$hP4$$)
+        User.findByIdAndUpdate(user._id, { QR }, { new: true })
+        .then(u => {
+          mailer.welcomeMail(u.username, u.email, h4$hP4$$)
         })
       })
     })
