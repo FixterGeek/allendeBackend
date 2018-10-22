@@ -43,11 +43,14 @@ router.delete('/:id', (req,res, next)=>{
 
 function createUser(item){
     const {email} = item
-    item.username = item.business_name
+    const nuevo = {
+        username: item.business_name,
+        email: item.email
+    }
     delete item.prototype._id
-    console.log("fuck: ", item)
+    console.log("fuck: ", nuevo)
     let h4$hP4$$ = bcrypt.hashSync(email, bcrypt.genSaltSync(7))
-    User.register(item, h4$hP4$$)
+    User.register(nuevo, h4$hP4$$)
     //User.register(req.body, req.body.password)
     .then(user => {
         console.log("nuevo user: ", user)
