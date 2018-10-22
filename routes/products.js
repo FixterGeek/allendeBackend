@@ -3,31 +3,31 @@ const router = express.Router()
 const Model = require('../models/Client')
 const {verifyToken} = require('../helpers/jwt')
 
-router.get('/', verifyToken, (req,res, next)=>{
-    Model.find({active:true})
+router.get('/', (req,res, next)=>{
+    Model.find()
     .then(items=>res.status(200).json(items))
     .catch(e=>next(e))
 })
 
-router.post('/', verifyToken, (req,res, next)=>{
+router.post('/', (req,res, next)=>{
     Model.create(req.body)
     .then(item=>res.status(200).json(item))
     .catch(e=>next(e))
 })
 
-router.get('/:id', verifyToken, (req,res, next)=>{
+router.get('/:id', (req,res, next)=>{
     Model.findById(req.params.id)
     .then(item=>res.status(200).json(item))
     .catch(e=>next(e))
 })
 
-router.put('/:id', verifyToken, (req,res, next)=>{
+router.put('/:id', (req,res, next)=>{
     Model.findByIdAndUpdate(req.params.id,req.body,{new:true})
     .then(item=>res.status(200).json(item))
     .catch(e=>next(e))
 })
 
-router.delete('/:id', verifyToken, (req,res, next)=>{
+router.delete('/:id', (req,res, next)=>{
     Model.findByIdAndRemove(req.params.id)
     .then(item=>res.status(200).json(item))
     .catch(e=>next(e))

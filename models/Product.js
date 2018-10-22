@@ -1,14 +1,19 @@
 const Schema = require('mongoose').Schema
 
 const productSchema = new Schema({
-  product_code: String,
+  stock:Number,
+  fermentation:String,
+  alc_vol: String,
+  ibus:String,
+  color:String,
+  aroma:String,
+  sabor: String,
+  elab_time: String,
+  temp:String,
+  pairing: String,
   name: String,
   price: String,
-  photoURL: String,
-  style: String,
-  alcohol_percentage: String,
-  description: String,
-  bitterness: String,
+  photoURL: String
 }, {
   timestamps: {
     createdAt: 'created_at',
