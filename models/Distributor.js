@@ -25,7 +25,7 @@ const distributorSchema = new Schema({
   business_address_int: String,
   business_address_neighborhood: String,
   business_address_zip_code: String,
-  business_addresss_state: String,
+  business_address_state: String,
   business_address_city: String,
   comments: String,
   location_zone: Number,

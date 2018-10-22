@@ -11,7 +11,7 @@ router.get('/', (req,res, next)=>{
 
 router.post('/', (req,res, next)=>{
     Model.create(req.body)
-    .then(item=>res.status(200).json(item))
+    .then(item=>res.status(201).json(item))
     .catch(e=>next(e))
 })
 
