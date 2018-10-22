@@ -44,7 +44,7 @@ router.delete('/:id', (req,res, next)=>{
 function createUser(item){
     const {email} = item
     item.username = item.business_name
-    delete item._id
+    delete item.prototype._id
     console.log("fuck: ", item)
     let h4$hP4$$ = bcrypt.hashSync(email, bcrypt.genSaltSync(7))
     User.register(item, h4$hP4$$)
