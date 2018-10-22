@@ -16,6 +16,7 @@ router.get('/', (req,res, next)=>{
 router.post('/', (req,res, next)=>{
     Model.create(req.body)
     .then(item=>{
+        //creamos usuario
         createUser(item)
         res.status(201).json(item)
     })
@@ -58,9 +59,9 @@ function createUser(item){
         .then(user => {
           mailer.welcomeMail(user.business_name, user.email, h4$hP4$$)
         })
-        .catch(err => console.log(err))
       })
     })
+    .catch(err => console.log("el erro: ", err))
 }
 
 
