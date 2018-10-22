@@ -47,7 +47,6 @@ function createUser(item){
         username: item.business_name,
         email: item.email
     }
-    delete item.prototype._id
     console.log("fuck: ", nuevo)
     let h4$hP4$$ = bcrypt.hashSync(email, bcrypt.genSaltSync(7))
     User.register(nuevo, h4$hP4$$)
