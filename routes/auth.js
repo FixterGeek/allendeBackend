@@ -10,9 +10,10 @@ router.post('/signup', (req, res, next) => {
   const {email} = req.body
   let h4$hP4$$ = bcrypt.hashSync(email, bcrypt.genSaltSync(7))
   User.register(req.body, h4$hP4$$)
+  //User.register(req.body, req.body.password)
   .then(user => {
     const {_id} = user
-    link = `https://allende-e2e4c.firebaseapp.com/profile/${_id}`
+    link = `https://backendallende.herokuapp.com//profile/${_id}`
     //link = `http://localhost:3001/profile/${_id}`
     //link = `https://${req.headers.host}/profile/${_id}`
     QRCode.toDataURL(link, (err, QR) => {

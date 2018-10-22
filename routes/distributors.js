@@ -11,7 +11,17 @@ router.get('/', (req,res, next)=>{
 
 router.post('/', (req,res, next)=>{
     Model.create(req.body)
-    .then(item=>res.status(201).json(item))
+    .then(item=>{
+        item.username = item.email
+        fetch('/signup', {
+            method:"post",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(item)
+        })
+        res.status(201).json(item)
+    })
     .catch(e=>next(e))
 })
 
