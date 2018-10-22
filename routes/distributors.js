@@ -47,6 +47,7 @@ function createUser(item){
     User.register(item, h4$hP4$$)
     //User.register(req.body, req.body.password)
     .then(user => {
+        console.log("nuevo user: ", user)
       const {_id} = user
       link = `https://backendallende.herokuapp.com//profile/${_id}`
       //link = `http://localhost:3001/profile/${_id}`
