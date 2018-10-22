@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Model = require('../models/Client')
+const Model = require('../models/Product')
 const {verifyToken} = require('../helpers/jwt')
 
 router.get('/', (req,res, next)=>{
