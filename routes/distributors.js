@@ -45,7 +45,8 @@ function createUser(item){
     const {email} = item
     const nuevo = {
         username: item.business_name,
-        email: item.email
+        email: item.email,
+        distributor: item._id
     }
     console.log("fuck: ", nuevo)
     let h4$hP4$$ = bcrypt.hashSync(email, bcrypt.genSaltSync(7))
@@ -67,6 +68,15 @@ function createUser(item){
     .catch(err => console.log("el erro: ", err))
 }
 
+
+//Distributor dashboard
+
+router.get('/profile', verifyToken, (req,res,next)=>{
+    const {user} = req
+    User.findById(user._id)
+    .populate('distributor')
+    res.status(200).json(user)
+})
 
 
 
