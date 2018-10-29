@@ -13,7 +13,11 @@ const productSchema = new Schema({
   pairing: String,
   name: String,
   price: String,
-  photoURL: String
+  photoURL: String,
+  active:{
+    type: Boolean,
+    default: true
+  }
 }, {
   timestamps: {
     createdAt: 'created_at',
