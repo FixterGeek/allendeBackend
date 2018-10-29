@@ -3,8 +3,9 @@ const router = express.Router()
 const Model = require('../models/Product')
 const {verifyToken} = require('../helpers/jwt')
 
-router.get('/', (req,res, next)=>{
-    Model.find()
+router.get('/', verifyToken, (req,res, next)=>{
+    const {active=true} = req.query
+    Model.find({active})
     .then(items=>res.status(200).json(items))
     .catch(e=>next(e))
 })

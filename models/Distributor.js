@@ -11,6 +11,7 @@ const distributorSchema = new Schema({
   rfc: String,
   business_name: String,
   credit_amount: Number,
+  credit_available: Number,
   credit_days: Number,
   discount: Number,
   delivery_address_street: String,
