@@ -71,7 +71,7 @@ function createUser(item){
 
 //Distributor dashboard
 
-router.get('/profile', verifyToken, (req,res,next)=>{
+router.get('/profile', (req,res,next)=>{
     res.send("perro")
 })
 
