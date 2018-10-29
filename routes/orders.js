@@ -15,6 +15,7 @@ router.post('/', verifyToken, (req,res, next)=>{
     //distribuidor
     Distributor.findById(req.user.distributor)
     .then(dist=>{
+        console.log("ya me quiero dormir: ", dist)
         order.discount = dist.discount
         order.subtotal = order.products.reduce((acc, p)=>{
             return acc + p.total
