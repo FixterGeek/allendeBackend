@@ -5,7 +5,7 @@ const Distributor = require('../models/Distributor')
 const {verifyToken} = require('../helpers/jwt')
 
 router.get('/', verifyToken, (req,res, next)=>{
-    Model.find({active:true})
+    Model.find({distributor:req.user.distributor})
     .then(items=>res.status(200).json(items))
     .catch(e=>next(e))
 })
