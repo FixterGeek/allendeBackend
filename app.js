@@ -19,7 +19,11 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
-//que pedo
+//sin engine
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'hbs')
+
+
 app.use(cors());
 
 app.use(passport.initialize());

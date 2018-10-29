@@ -12,6 +12,11 @@ const userSchema = new Schema({
   distributor:{
     type: Schema.Types.ObjectId,
     ref: "Distributor"
+  },
+  role:{
+    type: String,
+    enum: ["ADMIN", "DIST"],
+    default:"DIST"
   }
 }, {
   timestamps: {
