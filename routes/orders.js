@@ -11,7 +11,7 @@ router.get('/', verifyToken, (req,res, next)=>{
 })
 
 router.post('/', verifyToken, (req,res, next)=>{
-    const {order} = req.body
+    const order = req.body
     //distribuidor
     Distributor.findById(req.user.distributor)
     .then(dist=>{
