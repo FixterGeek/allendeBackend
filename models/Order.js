@@ -5,20 +5,21 @@ const orderSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  client: {
-    type: Schema.Types.ObjectId,
-    ref: 'Client'
+  products: [{
+    type: Array
+  }],
+  status: {
+    type: String,
+    enum: ["PENDIENTE", "APROVADA","ENVIADA", "ENTREGADA"],
+    default: "PENDIENTE"
   },
-  order: [
-    {
-      name_product: String,
-      price: Number,
-      qty: Number
-    }
-  ],
-  estimated_date: String,
-  status: String,
+  payment: {
+    type: String,
+    enum: ["PENDING", "PAID"],
+    default: "PENDING"
+  },
   QR: String,
-  bill: String,
+  discount:Number,
+  subtotal: Number,
   total: Number
 })

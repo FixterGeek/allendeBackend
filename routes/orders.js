@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Model = require('../models/Order')
+const Distributor = require('../models/Distributor')
 const {verifyToken} = require('../helpers/jwt')
 
 router.get('/', verifyToken, (req,res, next)=>{
@@ -10,7 +11,18 @@ router.get('/', verifyToken, (req,res, next)=>{
 })
 
 router.post('/', verifyToken, (req,res, next)=>{
-    Model.create(req.body)
+    const {order} = req.body
+    //distribuidor
+    Distributor.findById(req.user.distributor)
+    .then(dist=>{
+        order.discount = dist.discount
+        order.subtotal = order.products.reduce((acc, p)=>{
+            return acc + p.total
+        },0)
+        order.total = order.subtotal - (order.subtotal*(order.discount / 100))
+        order.distributor = req.user.distributor
+        return Model.create(order)
+    })
     .then(item=>res.status(200).json(item))
     .catch(e=>next(e))
 })
