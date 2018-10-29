@@ -36,6 +36,15 @@ router.get('/profile', verifyToken, (req,res,next)=>{
         .catch(e=>next(e))
 })
 
+router.post('/profile', verifyToken, (req,res,next)=>{
+    const {user} = req
+    Model.findByIdAndUpdate(user.distributor, req.body, {new:true})
+        .then(profile=>{
+            res.status(200).json(profile)
+        })
+        .catch(e=>next(e))
+})
+
 //Distributor dashboard
 
 router.get('/:id', (req,res, next)=>{
