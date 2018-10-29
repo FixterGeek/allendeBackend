@@ -5,7 +5,7 @@ const {verifyToken} = require('../helpers/jwt')
 
 router.get('/', verifyToken, (req,res, next)=>{
     const query ={}
-    {active} = req.query
+    const {active} = req.query
     if(active) query[active] = active
     Model.find(query)
     .then(items=>res.status(200).json(items))
