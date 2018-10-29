@@ -23,3 +23,5 @@ const orderSchema = new Schema({
   subtotal: Number,
   total: Number
 })
+
+module.exports = require('mongoose').model("Order", orderSchema)
