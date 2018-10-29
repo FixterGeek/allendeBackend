@@ -39,6 +39,11 @@ router.get('/profile', verifyToken, (req,res,next)=>{
 router.post('/profile', verifyToken, (req,res,next)=>{
     const {user} = req
     delete req.body.credit_amount
+    delete req.body.credit_days
+    delete req.body.discount
+    delete req.body.business_name
+    delete req.body.rfc
+
     Model.findByIdAndUpdate(user.distributor, req.body, {new:true})
         .then(profile=>{
             res.status(200).json(profile)
