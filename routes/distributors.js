@@ -75,7 +75,7 @@ router.get('/profile', verifyToken, (req,res,next)=>{
     const {user} = req
     console.log("Perro:  ", user)
     User.findById(user._id)
-    .populate('distributor')
+    // .populate('distributor')
     res.status(200).json(user)
 })
 
