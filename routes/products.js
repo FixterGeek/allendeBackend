@@ -4,8 +4,10 @@ const Model = require('../models/Product')
 const {verifyToken} = require('../helpers/jwt')
 
 router.get('/', verifyToken, (req,res, next)=>{
-    const {active=true} = req.query
-    Model.find({active})
+    const query ={}
+    {active} = req.query
+    if(active) query[active] = active
+    Model.find(query)
     .then(items=>res.status(200).json(items))
     .catch(e=>next(e))
 })
