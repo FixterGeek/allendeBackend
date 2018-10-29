@@ -23,6 +23,21 @@ router.post('/', (req,res, next)=>{
     .catch(e=>next(e))
 })
 
+
+//Distributor dashboard
+
+router.get('/profile', verifyToken, (req,res,next)=>{
+    const {user} = req
+    User.findById(user._id)
+    .populate('distributor')
+        .then(user=>{
+            res.status(200).json(user)
+        })
+        .catch(e=>next(e))
+})
+
+//Distributor dashboard
+
 router.get('/:id', (req,res, next)=>{
     Model.findById(req.params.id)
     .then(item=>res.status(200).json(item))
@@ -69,11 +84,7 @@ function createUser(item){
 }
 
 
-//Distributor dashboard
 
-router.get('/profile', (req,res,next)=>{
-    res.send("perro")
-})
 
 
 
