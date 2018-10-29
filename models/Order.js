@@ -5,9 +5,9 @@ const orderSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  products: [{
+  products: {
     type: Array
-  }],
+  },
   status: {
     type: String,
     enum: ["PENDIENTE", "APROVADA","ENVIADA", "ENTREGADA"],
