@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Model = require('../models/Distributor')
+const Order = require('../models/Order')
 const User = require('../models/User')
 const {verifyToken} = require('../helpers/jwt')
 const bcrypt                         = require('bcrypt')
@@ -31,6 +32,13 @@ router.get('/profile', verifyToken, (req,res,next)=>{
     User.findById(user._id)
     .populate('distributor')
         .then(user=>{
+            Order.find({distributor:user._id})
+            .then(orders=>{
+                if(!orders || orders.length < 1) return res.status(200).json(user)
+                const creditUsed = orders.reduce((acc, order)=>acc+order.total,0)
+                user.credit_available = user.credit_amount - creditUsed
+                return res.status(200).json(user)
+            })
             res.status(200).json(user)
         })
         .catch(e=>next(e))
