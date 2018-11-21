@@ -39,6 +39,7 @@ router.get('/profile', verifyToken, (req,res,next)=>{
                 // if(!orders || orders.length < 1) return res.status(200).json(user)
                 const creditUsed = orders.reduce((acc, order)=>acc+order.total,0)
                 user.credit_available = user.credit_amount - creditUsed
+                user.save()
                 return res.status(200).json(user)
             })
             res.status(200).json(user)
