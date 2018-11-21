@@ -43,7 +43,11 @@ const distributorSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Client'
     }
-  ]
+  ],
+  credit_available: {
+    type: Number,
+    default: credit_available(this)
+  }
 }, {
   timestamps: {
     createdAt: 'created_at',
@@ -51,8 +55,7 @@ const distributorSchema = new Schema({
   }
 })
 
-distributorSchema.virtual('credit_available')
-.get(()=>{
+function credit_available(this){
   return Order.find({distributor:this._id})
   .then(orders=>{
     const amountUsed =  orders.reduce((accumulator, order)=>{
@@ -60,6 +63,17 @@ distributorSchema.virtual('credit_available')
     },0)
     this.credit_amount - amountUsed
   }) 
-})
+}
+
+// distributorSchema.virtual('credit_available')
+// .get(()=>{
+//   return Order.find({distributor:this._id})
+//   .then(orders=>{
+//     const amountUsed =  orders.reduce((accumulator, order)=>{
+//       accumulator + order.total
+//     },0)
+//     this.credit_amount - amountUsed
+//   }) 
+// })
 
 module.exports = require('mongoose').model('Distributor', distributorSchema)
