@@ -32,6 +32,7 @@ router.get('/profile', verifyToken, (req,res,next)=>{
     User.findById(user._id)
     .populate('distributor')
     .lean()
+    .exec()
         .then(user=>{
             Order.find({distributor:user._id})
             .then(orders=>{
