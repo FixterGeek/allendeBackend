@@ -8,6 +8,7 @@ router.get('/orders', verifyToken, (req,res,next)=>{
     ClientOrder.find({distributor:req.user._id})
     .then(items=>res.status(200).json(items))
     .catch(e=>next(e))
+    //lol
 })
 
 router.get('/', verifyToken, (req,res, next)=>{
