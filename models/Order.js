@@ -22,6 +22,11 @@ const orderSchema = new Schema({
   discount:Number,
   subtotal: Number,
   total: Number
+}, {
+  timestamps:{
+    createdAt:true,
+    updatedAt:true
+  }
 })
 
 module.exports = require('mongoose').model("Order", orderSchema)
