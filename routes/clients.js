@@ -1,7 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const Model = require('../models/Client')
+const ClientOrder = require('../models/ClientOrder')
 const {verifyToken} = require('../helpers/jwt')
+
+router.get('/orders', verifyToken, (req,res,next)=>{
+    ClientOrder.find({distributor:req.user._id})
+    .then(items=>res.status(200).json(items))
+    .catch(e=>next(e))
+})
 
 router.get('/', verifyToken, (req,res, next)=>{
     Model.find({active:true})

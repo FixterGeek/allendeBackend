@@ -31,20 +31,10 @@ router.get('/profile', verifyToken, (req,res,next)=>{
     const {user} = req
     User.findById(user._id)
     .populate('distributor')
-    .lean()
-    .exec()
-        .then(user=>{
-            Order.find({distributor:user._id})
-            .then(orders=>{
-                // if(!orders || orders.length < 1) return res.status(200).json(user)
-                const creditUsed = orders.reduce((acc, order)=>acc+order.total,0)
-                user.credit_available = user.credit_amount - creditUsed
-                user.save()
-                return res.status(200).json(user)
-            })
-            res.status(200).json(user)
-        })
-        .catch(e=>next(e))
+    .then(user=>{
+        res.status(200).json(user)
+    })
+    .catch(e=>next(e))
 })
 
 router.post('/profile', verifyToken, (req,res,next)=>{
