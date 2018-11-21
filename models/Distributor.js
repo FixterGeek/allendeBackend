@@ -1,4 +1,5 @@
 const Schema = require('mongoose').Schema
+const Order = require('./Order')
 
 const distributorSchema = new Schema({
   email: String,
@@ -11,7 +12,7 @@ const distributorSchema = new Schema({
   rfc: String,
   business_name: String,
   credit_amount: Number,
-  credit_available: Number,
+  // credit_available: Number,
   credit_days: Number,
   discount: Number,
   delivery_address_street: String,
@@ -48,6 +49,17 @@ const distributorSchema = new Schema({
     createdAt: 'created_at',
     updatedAt: 'updated_at'
   }
+})
+
+distributorSchema.virtual('credit_available')
+.get(()=>{
+  return Order.find({distributor:this._id})
+  .then(orders=>{
+    const amountUsed =  orders.reduce((accumulator, order)=>{
+      accumulator + order.total
+    },0)
+    this.credit_amount - amountUsed
+  }) 
 })
 
 module.exports = require('mongoose').model('Distributor', distributorSchema)

@@ -5,6 +5,9 @@ const orderSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+  arrivalDate:{
+    type: Date
+  },
   products: {
     type: Array
   },
