@@ -35,7 +35,7 @@ router.get('/profile', verifyToken, (req,res,next)=>{
         .then(user=>{
             Order.find({distributor:user._id})
             .then(orders=>{
-                if(!orders || orders.length < 1) return res.status(200).json(user)
+                // if(!orders || orders.length < 1) return res.status(200).json(user)
                 const creditUsed = orders.reduce((acc, order)=>acc+order.total,0)
                 user.credit_available = user.credit_amount - creditUsed
                 return res.status(200).json(user)
