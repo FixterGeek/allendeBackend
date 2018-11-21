@@ -1,16 +1,24 @@
 const Schema = require('mongoose').Schema
 
 const clientSchema = new Schema({
-  rfc: String,
-  business_name: String,
-  billing_address: {
-    street: String,
-    number: String,
-    neighborhood: String,
-    zip_code: String,
-    state: String,
-    city: String
+  distributor:{
+    type: Schema.Types.ObjectId,
+    ref:"Distributor",
+    required: true
   },
+  rfc: String,
+  email: String,
+  business_name: {
+    type: String,
+    required: true
+  },
+  phone:String,
+  business_address_street:String,
+  business_address_number: String,
+  business_address_int: String,
+  business_address_zip_code: String,
+  business_address_neighborhood: String,
+  business_address_state: String,
   delivery_address: {
     street: String,
     number: String,
@@ -19,6 +27,7 @@ const clientSchema = new Schema({
     state: String,
     city: String
   },
+  contact_name: String,
   location_zone: Number,
   delivery_time: String
 }, {

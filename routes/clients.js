@@ -18,6 +18,7 @@ router.get('/', verifyToken, (req,res, next)=>{
 })
 
 router.post('/', verifyToken, (req,res, next)=>{
+    req.body.distributor = req.user._id
     Model.create(req.body)
     .then(item=>res.status(200).json(item))
     .catch(e=>next(e))
